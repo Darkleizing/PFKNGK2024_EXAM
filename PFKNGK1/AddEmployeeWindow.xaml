@@ -1,0 +1,25 @@
+﻿<Window x:Class="PFKNGK1.AddEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PFKNGK1"
+        mc:Ignorable="d"
+        Title="AddEmployeeWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"  Content="Полное имя:"/>
+        <TextBox Grid.Row="0" Name="FullNameTextBox" Margin="10,25,478,-25" Grid.RowSpan="5"/>
+        <Label Grid.Row="4" Content="Отдел:" Margin="0,30,0,-56"/>
+        <TextBox Grid.Row="4" Name="DepNameTextBox" Margin="10,56,478,-84" TextChanged="DepNameTextBox_TextChanged"/>
+        <Label Grid.Row="4" Content="Должность:" Margin="0,103,0,-129"/>
+        <TextBox Grid.Row="4" Name="PositionTextBox" TextChanged="PositionTextBox_TextChanged" Margin="10,146,478,-174"/>
+        <Button Grid.Row="4" Content="Add" Click="AddButton_Click" Margin="10,191,478,-211"/>
+    </Grid>
+</Window>

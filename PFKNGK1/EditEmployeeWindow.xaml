@@ -1,0 +1,26 @@
+﻿<Window x:Class="PFKNGK1.EditEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PFKNGK1"
+        mc:Ignorable="d"
+        Title="EditEmployeeWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="1" Content="Полное имя:"/>
+        <TextBox Grid.Row="5" Name="FullNameTextBox" Margin="10,5,464,-31"/>
+        <Label Grid.Row="5" Content="Отдел:" Margin="0,41,0,-67"/>
+        <TextBox Grid.Row="5" Name="DepartmentTextBox" Margin="10,72,464,-98"/>
+        <Label Grid.Row="5" Content="Должность:" Margin="0,103,0,-129"/>
+        <TextBox Grid.Row="5" Name="PositionTextBox" Margin="10,134,464,-160"/>
+        <Button Grid.Row="5" Content="Save" Click="SaveButton_Click" Margin="10,165,464,-185"/>
+    </Grid>
+</Window>

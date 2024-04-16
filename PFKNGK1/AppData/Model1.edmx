@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище PFKNGK1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Виды расходов">
+          <Key>
+            <PropertyRef Name="ID категории" />
+          </Key>
+          <Property Name="ID категории" Type="int" Nullable="false" />
+          <Property Name="Название категории" Type="varchar" MaxLength="50" />
+          <Property Name="Описание" Type="varchar" MaxLength="50" />
+          <Property Name="Предельная сумма" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Покупки">
+          <Key>
+            <PropertyRef Name="ID покупки" />
+          </Key>
+          <Property Name="ID покупки" Type="int" Nullable="false" />
+          <Property Name="ID сотрудника" Type="int" />
+          <Property Name="ID категории расходов" Type="int" />
+          <Property Name="Дата" Type="datetime" />
+          <Property Name="Сумма" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="ID сотрудника" />
+          </Key>
+          <Property Name="ID сотрудника" Type="int" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" />
+          <Property Name="Должность" Type="varchar" MaxLength="50" />
+          <Property Name="Отдел" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Покупки_Виды расходов">
+          <End Role="Виды расходов" Type="Self.Виды расходов" Multiplicity="0..1" />
+          <End Role="Покупки" Type="Self.Покупки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Виды расходов">
+              <PropertyRef Name="ID категории" />
+            </Principal>
+            <Dependent Role="Покупки">
+              <PropertyRef Name="ID категории расходов" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Покупки_Сотрудники">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="0..1" />
+          <End Role="Покупки" Type="Self.Покупки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="ID сотрудника" />
+            </Principal>
+            <Dependent Role="Покупки">
+              <PropertyRef Name="ID сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PFKNGK1ModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Виды расходов" EntityType="Self.Виды расходов" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Покупки" EntityType="Self.Покупки" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Покупки_Виды расходов" Association="Self.FK_Покупки_Виды расходов">
+            <End Role="Виды расходов" EntitySet="Виды расходов" />
+            <End Role="Покупки" EntitySet="Покупки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Покупки_Сотрудники" Association="Self.FK_Покупки_Сотрудники">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Покупки" EntitySet="Покупки" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PFKNGK1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Виды_расходов">
+          <Key>
+            <PropertyRef Name="ID_категории" />
+          </Key>
+          <Property Name="ID_категории" Type="Int32" Nullable="false" />
+          <Property Name="Название_категории" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Описание" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Предельная_сумма" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Покупки" Relationship="Self.FK_Покупки_Виды_расходов" FromRole="Виды_расходов" ToRole="Покупки" />
+        </EntityType>
+        <EntityType Name="Покупки">
+          <Key>
+            <PropertyRef Name="ID_покупки" />
+          </Key>
+          <Property Name="ID_покупки" Type="Int32" Nullable="false" />
+          <Property Name="ID_сотрудника" Type="Int32" />
+          <Property Name="ID_категории_расходов" Type="Int32" />
+          <Property Name="Дата" Type="DateTime" Precision="3" />
+          <Property Name="Сумма" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Виды_расходов" Relationship="Self.FK_Покупки_Виды_расходов" FromRole="Покупки" ToRole="Виды_расходов" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.FK_Покупки_Сотрудники" FromRole="Покупки" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="ID_сотрудника" />
+          </Key>
+          <Property Name="ID_сотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Должность" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Отдел" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Покупки" Relationship="Self.FK_Покупки_Сотрудники" FromRole="Сотрудники" ToRole="Покупки" />
+        </EntityType>
+        <Association Name="FK_Покупки_Виды_расходов">
+          <End Role="Виды_расходов" Type="Self.Виды_расходов" Multiplicity="0..1" />
+          <End Role="Покупки" Type="Self.Покупки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Виды_расходов">
+              <PropertyRef Name="ID_категории" />
+            </Principal>
+            <Dependent Role="Покупки">
+              <PropertyRef Name="ID_категории_расходов" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Покупки_Сотрудники">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="0..1" />
+          <End Role="Покупки" Type="Self.Покупки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="ID_сотрудника" />
+            </Principal>
+            <Dependent Role="Покупки">
+              <PropertyRef Name="ID_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PFKNGK1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Виды_расходов" EntityType="Self.Виды_расходов" />
+          <EntitySet Name="Покупки" EntityType="Self.Покупки" />
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" />
+          <AssociationSet Name="FK_Покупки_Виды_расходов" Association="Self.FK_Покупки_Виды_расходов">
+            <End Role="Виды_расходов" EntitySet="Виды_расходов" />
+            <End Role="Покупки" EntitySet="Покупки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Покупки_Сотрудники" Association="Self.FK_Покупки_Сотрудники">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Покупки" EntitySet="Покупки" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PFKNGK1ModelContainer" CdmEntityContainer="PFKNGK1Entities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PFKNGK1Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Виды_расходов">
+            <EntityTypeMapping TypeName="PFKNGK1Model.Виды_расходов">
+              <MappingFragment StoreEntitySet="Виды расходов">
+                <ScalarProperty Name="ID_категории" ColumnName="ID категории" />
+                <ScalarProperty Name="Название_категории" ColumnName="Название категории" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Предельная_сумма" ColumnName="Предельная сумма" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Покупки">
+            <EntityTypeMapping TypeName="PFKNGK1Model.Покупки">
+              <MappingFragment StoreEntitySet="Покупки">
+                <ScalarProperty Name="ID_покупки" ColumnName="ID покупки" />
+                <ScalarProperty Name="ID_сотрудника" ColumnName="ID сотрудника" />
+                <ScalarProperty Name="ID_категории_расходов" ColumnName="ID категории расходов" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудники">
+            <EntityTypeMapping TypeName="PFKNGK1Model.Сотрудники">
+              <MappingFragment StoreEntitySet="Сотрудники">
+                <ScalarProperty Name="ID_сотрудника" ColumnName="ID сотрудника" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Отдел" ColumnName="Отдел" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
